@@ -106,6 +106,13 @@ namespace UnityStandardAssets._2D
             transform.position = newPos;
 
             m_LastTargetPosition = target.position;
+
+            if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
+            {
+                
+                //rgbd.constraints = RigidbodyConstraints2D.None;
+                Debug.Log("h is pressed");
+            }
         }
     }
 }

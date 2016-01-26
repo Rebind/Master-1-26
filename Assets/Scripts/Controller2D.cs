@@ -7,6 +7,9 @@ public class Controller2D : RaycastController {
 	float maxDescendAngle = 80;
 
 	public CollisionInfo collisions;
+	
+	public Vector2 playerInput;
+	
 
 
 	public override void Start() {

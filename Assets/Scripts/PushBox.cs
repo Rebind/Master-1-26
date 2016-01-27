@@ -7,56 +7,59 @@ public class PushBox : MonoBehaviour
     private MergeAttachDetach arm;
     private Rigidbody2D rgbd;
     private Animator myAnimator;
-    Vector3 start;
-    //private int myState;
+	private Vector3 addGap = new Vector3(.3f,0,0);
+	private Vector3 temPosition;
 
-    // Use this for initialization
     void Start()
     {
-        //myState = myAnimator.GetInteger("state");
-        // myAnimator = GetComponent<Animator>();
-        start = gameObject.transform.position;
         Player = GameObject.Find("Player");
         arm = Player.GetComponent<MergeAttachDetach>();
         rgbd = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //myState = myAnimator.GetInteger("state");
-        Debug.Log(gameObject.transform.position.x);
-
+        //Debug.Log(gameObject.transform.position.x);
+		pushController();
         
-
-        if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
-        {
-            
-            //rgbd.constraints = RigidbodyConstraints2D.None;
-            gameObject.layer = 11;
-        }
-        if (Input.GetKeyUp(KeyCode.H))
-        {
-            gameObject.transform.position = start;
-            gameObject.layer = 8;
-          // rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
-       /* if (!arm.hasArm || !arm.hasSecondArm)
-        {
-            //
-        }*/
-
-
     }
+
+	private void pushController(){
+		if (Input.GetKeyDown(KeyCode.H) && (arm.hasArm || arm.hasSecondArm))
+		{
+			//get the position when player press "h"
+			temPosition = gameObject.transform.position;
+			rgbd.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
+			gameObject.layer = 11;
+		}
+		if (Input.GetKeyUp(KeyCode.H) && (arm.hasArm || arm.hasSecondArm))
+		{
+			rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
+			gameObject.layer = 8;
+			//make a gap 
+			if (gameObject.transform.position.x > temPosition.x) {
+				gameObject.transform.position += addGap;
+			} else if (gameObject.transform.position.x < temPosition.x) {
+				gameObject.transform.position -= addGap;
+			}
+		}
+	}
+
+	//no press key requise
+	private void pushController2(){
+		if (arm.hasArm || arm.hasSecondArm)
+		{
+			rgbd.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
+			gameObject.layer = 11;
+		}
+		if (arm.hasArm == false && arm.hasSecondArm == false)
+		{
+			rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
+			gameObject.layer = 8;
+		}
+	}
+
+
 
 }
 
-   /* void OnCollisonEnter(Collider2D other)
-    {
-            if (other.name == "death")
-            {
-                Debug.Log("im pushing");
-            }
-
-    }
-}*/

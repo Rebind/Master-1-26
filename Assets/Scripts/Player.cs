@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private Animator myAnimator;
     private bool canJump;
     private int state;
-
+	public LayerMask layer;
 
     void Start()
     {
@@ -48,14 +48,23 @@ public class Player : MonoBehaviour
         HandleInputs();
         handleBodyCollisions();
         handleBuffsDebuffs();
-
-         if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
-        {
-            //myController.collisionMask;
-            //rgbd.constraints = RigidbodyConstraints2D.None;
-            Debug.Log(myController.collisionMask);
-        }
+		pushBox ();
     }
+
+	private void pushBox(){
+		if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
+		{
+			myController.collisionMask.value = -3640;
+			//rgbd.constraints = RigidbodyConstraints2D.None;
+			Debug.Log(myController.collisionMask.value);
+		}
+		if (Input.GetKeyUp(KeyCode.H))
+		{
+
+			myController.collisionMask.value = -1592;
+			// rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
+		}
+	}
 
     private void HandleMovments()
     {

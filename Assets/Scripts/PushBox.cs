@@ -7,6 +7,7 @@ public class PushBox : MonoBehaviour
     private MergeAttachDetach arm;
     private Rigidbody2D rgbd;
     private Animator myAnimator;
+	Vector3 temp = new Vector3(.4f,0,0);
     Vector3 start;
     //private int myState;
 
@@ -26,37 +27,25 @@ public class PushBox : MonoBehaviour
     {
         //myState = myAnimator.GetInteger("state");
         Debug.Log(gameObject.transform.position.x);
-
+		start = gameObject.transform.position;
         
 
-        if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
+        if (Input.GetKeyDown(KeyCode.H) && (arm.hasArm || arm.hasSecondArm))
         {
-            
+			//rgbd.constraints = RigidbodyConstraints2D.None;
+			rgbd.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
             //rgbd.constraints = RigidbodyConstraints2D.None;
             gameObject.layer = 11;
         }
         if (Input.GetKeyUp(KeyCode.H))
         {
-            gameObject.transform.position = start;
-            gameObject.layer = 8;
-          // rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
+            //gameObject.transform.position = start;
+
+			rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
+			gameObject.layer = 8;
+			gameObject.transform.position += temp;
         }
-       /* if (!arm.hasArm || !arm.hasSecondArm)
-        {
-            //
-        }*/
-
-
     }
 
 }
 
-   /* void OnCollisonEnter(Collider2D other)
-    {
-            if (other.name == "death")
-            {
-                Debug.Log("im pushing");
-            }
-
-    }
-}*/

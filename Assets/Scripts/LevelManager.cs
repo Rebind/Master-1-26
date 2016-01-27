@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds(respawnDelay);
         Application.LoadLevel(Application.loadedLevel);
+        yield return new WaitForSeconds(respawnDelay);
         player.enabled = true;
         player.GetComponent<Renderer>().enabled = true;
         

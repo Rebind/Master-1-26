@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
     {
         if (myAnimator.GetInteger("state") == 0)
         {
-			changeBoxCollider (2.31f, 2.29f, 0f, 0f);
+			changeBoxCollider (1.2f, 1.2f, 0f, 0f);
 			myController.CalculateRaySpacing ();
 
         }

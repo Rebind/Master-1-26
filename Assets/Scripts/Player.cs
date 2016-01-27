@@ -48,23 +48,8 @@ public class Player : MonoBehaviour
         HandleInputs();
         handleBodyCollisions();
         handleBuffsDebuffs();
-		pushBox ();
+		//pushBox ();
     }
-
-	private void pushBox(){
-		if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
-		{
-			myController.collisionMask.value = -3640;
-			//rgbd.constraints = RigidbodyConstraints2D.None;
-			Debug.Log(myController.collisionMask.value);
-		}
-		if (Input.GetKeyUp(KeyCode.H))
-		{
-
-			myController.collisionMask.value = -1592;
-			// rgbd.constraints = RigidbodyConstraints2D.FreezeAll;
-		}
-	}
 
     private void HandleMovments()
     {
@@ -240,5 +225,18 @@ public class Player : MonoBehaviour
             myBoxcollider.offset = offset;
         }
     }
+
+	//control the collision mask
+	private void pushBox(){
+		if (Input.GetKeyDown(KeyCode.H)) //&& (arm.hasArm || arm.hasSecondArm))
+		{
+			myController.collisionMask.value = -3640;
+			//Debug.Log(myController.collisionMask.value);
+		}
+		if (Input.GetKeyUp(KeyCode.H))
+		{
+			myController.collisionMask.value = -1592;
+		}
+	}
 
 }

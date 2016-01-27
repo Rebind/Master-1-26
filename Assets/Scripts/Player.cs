@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private Controller2D myController;
     private Animator myAnimator;
     private bool canJump;
-   private int state;
+    private int state;
 
 
     void Start()
@@ -48,6 +48,13 @@ public class Player : MonoBehaviour
         HandleInputs();
         handleBodyCollisions();
         handleBuffsDebuffs();
+
+         if (Input.GetKeyDown(KeyCode.H)) //&& (darm.hasArm || arm.hasSecondArm))
+        {
+            //myController.collisionMask;
+            //rgbd.constraints = RigidbodyConstraints2D.None;
+            Debug.Log(myController.collisionMask);
+        }
     }
 
     private void HandleMovments()

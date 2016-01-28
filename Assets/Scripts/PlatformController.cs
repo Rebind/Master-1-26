@@ -15,8 +15,14 @@ public class PlatformController : RaycastController {
 	private float reversalTime;
 	public float period = 1f;
 
+	GameObject pp;
+	pressureplates moveP;
+
 	public override void Start () {
 		base.Start ();
+		pp = GameObject.Find("TriggerPlatform");
+		moveP  = pp.GetComponent<pressureplates>();
+
 	}
 
 	void Update () {
@@ -32,7 +38,11 @@ public class PlatformController : RaycastController {
 
 
 		velocity = move * Time.deltaTime;
-		transform.Translate (velocity);
+		if (moveP.movePlatform && this.name == "TriggerPlatformTest") {
+			transform.Translate (velocity);
+			Debug.Log ("Checking if player on top: " + moveP.movePlatform);
+		}
+		else if(this.name != "TriggerPlatformTest") transform.Translate (velocity);
 
 		CalculatePassengerMovement(velocity);
 
